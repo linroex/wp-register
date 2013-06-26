@@ -6,7 +6,7 @@
 				'post_author'=>0,
 				'post_content'=>'',
 				'post_status'=>'private',
-				'post_title'=>$_POST['name'],
+				'post_title'=>$_POST['stuname'],
 				'post_type'=>'users'
 			);
 			wp_insert_post($post);
