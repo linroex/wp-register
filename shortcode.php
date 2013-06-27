@@ -19,7 +19,7 @@
 		}
 		public static function html_submit($attrs){
 			extract(shortcode_atts(array('value'=>''),$attrs));
-			return '<script type="text/javascript">function submit_register(){jQuery.post("index.php",jQuery(".register_form").serialize()).success(function(){alert("註冊成功")})}</script><input type="button" value="' . $value . '" onclick="submit_register();"/>';
+			return '<script type="text/javascript">function submit_register(){jQuery.post("index.php",jQuery(".register_form").serialize()).success(function(){jQuery(".register_form").html("<h2>註冊成功</h2>")})}</script><input type="button" value="' . $value . '" onclick="submit_register();"/>';
 		}
 		public static function html_option_func($attrs){
 			extract(shortcode_atts(array('text'=>'','value'=>''),$attrs));
