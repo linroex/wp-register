@@ -17,7 +17,10 @@
 			extract(shortcode_atts(array('name'=>'','title'=>''),$attrs));
 			return '<select name="' . $name . '">' . do_shortcode($content) . '</select>';
 		}
-		
+		public static function html_submit($attrs){
+			extract(shortcode_atts(array('value'=>''),$attrs));
+			return '<script type="text/javascript">function submit_register(){jQuery.post("index.php",jQuery(".register_form").serialize()).success(function(){alert("註冊成功")})}</script><input type="button" value="' . $value . '" onclick="submit_register();"/>';
+		}
 		public static function html_option_func($attrs){
 			extract(shortcode_atts(array('text'=>'','value'=>''),$attrs));
 			return '<option value="' . $value . '">' . $text . '</option>';
@@ -43,14 +46,16 @@
 		'select',
 		'option',
 		'textarea',
-		'option_r'
+		'option_r',
+		'submit'
 	),'func'=>array(
 		'html_input_func',
 		'html_form_func',
 		'html_select_func',
 		'html_option_func',
 		'html_textarea_func',
-		'html_rangeoption_func'
+		'html_rangeoption_func',
+		'html_submit'
 	));
 	
 	for($i=0;$i<=count($shortcodes['code']);$i++){

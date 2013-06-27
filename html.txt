@@ -2,53 +2,53 @@
 <table style="width:85%;margin:0 auto;">
 	<tr>
 		<td style="width:20%;">姓名</td>
-		<td>[input name="stuname"]</td>
+		<td>[input name="prefix_stuname"]</td>
 	</tr>
 	<tr>
 		<td>身份</td>
-		<td>[select name="stage"][option text="368隻限量布卡蛙" value="1"][option text="社會關懷布卡蛙" value="2"][option text="一起出去玩布卡蛙" value="3"][/select]</td>
+		<td>[select name="prefix_stage"][option text="368隻限量布卡蛙" value="1"][option text="社會關懷布卡蛙" value="2"][option text="一起出去玩布卡蛙" value="3"][/select]</td>
 	</tr>
 	<tr>
 		<td>生日</td>
 		<td>
-[select name="year"][option_r start="1990" end="2013"][/select]年[select name="month"][option_r start="1" end="12"][/select]月[select name="day"][option_r start="1" end="31"][/select]日
+[select name="bir_year"][option_r start="1990" end="2013"][/select]年[select name="bir_month"][option_r start="1" end="12"][/select]月[select name="bir_day"][option_r start="1" end="31"][/select]日
 </td>
 	</tr>
 	<tr>
 		<td>館別</td>
-		<td>[select name="department"][option text="台北南京館" value="台北南京館"][option text="台北信義館" value="台北信義館"][option text="台北新店館" value="台北新店館"][option text="台北石牌館" value="台北石牌館"][option text="台北板橋館" value="台北板橋館"][option text="台北內湖館" value="台北內湖館"][option text="台北南門館" value="台北南門館"][option text="桃園春日館" value="桃園春日館"][option text="中壢青山館" value="中壢青山館"][option text="新竹三民館" value="新竹三民館"][option text="新竹竹科館" value="新竹竹科館"][option text="台中道禾館" value="台中道禾館"][option text="台中文心館" value="台中文心館"][option text="嘉義飛越館" value="嘉義飛越館"][option text="台南丹青館" value="台南丹青館"][option text="台南安平館" value="台南安平館"][option text="高雄中正館" value="高雄中正館"][option text="高雄博愛館" value="高雄博愛館"][/select]</td>
+		<td>[select name="prefix_department"][option text="台北南京館" value="台北南京館"][option text="台北信義館" value="台北信義館"][option text="台北新店館" value="台北新店館"][option text="台北石牌館" value="台北石牌館"][option text="台北板橋館" value="台北板橋館"][option text="台北內湖館" value="台北內湖館"][option text="台北南門館" value="台北南門館"][option text="桃園春日館" value="桃園春日館"][option text="中壢青山館" value="中壢青山館"][option text="新竹三民館" value="新竹三民館"][option text="新竹竹科館" value="新竹竹科館"][option text="台中道禾館" value="台中道禾館"][option text="台中文心館" value="台中文心館"][option text="嘉義飛越館" value="嘉義飛越館"][option text="台南丹青館" value="台南丹青館"][option text="台南安平館" value="台南安平館"][option text="高雄中正館" value="高雄中正館"][option text="高雄博愛館" value="高雄博愛館"][/select]</td>
 	</tr>
 	<tr>
 		<td>性別</td>
-		<td>[select name="gender"][option text="男生" value="男"][option text="女生" value="女"][/select]</td>
+		<td>[select name="prefix_gender"][option text="男生" value="男"][option text="女生" value="女"][/select]</td>
 	</tr>
 	<tr>
 		<td>住址</td>
-		<td>[input name="address"]</td>
+		<td>[input name="prefix_address"]</td>
 	</tr>
 	<tr>
 		<td>聯絡電話（學員）</td>
-		<td>[input name="stu-phone"]</td>
+		<td>[input name="prefix_stu-phone"]</td>
 	</tr>
 	<tr>
 		<td>家長姓名</td>
-		<td>[input name="parent-name"]</td>
+		<td>[input name="prefix_parent-name"]</td>
 	</tr>
 	<tr>
 		<td>聯絡電話（家長）</td>
-		<td>[input name="parent-phone"]</td>
+		<td>[input name="prefix_parent-phone"]</td>
 	</tr>
 	<tr>
 		<td>電子信箱</td>
-		<td>[input name="email"]</td>
+		<td>[input name="prefix_email"]</td>
 	</tr>
 
 	<tr>
 		<td>備註</td>
-		<td>[textarea name="note"]</td>
+		<td>[textarea name="prefix_note"]</td>
 	</tr>
 	<tr>
-		<td colspan=2><center>[input type="submit" value="送出"]</center></td>
+		<td colspan=2><center>[submit value="送出"]</center></td>
 
 	</tr>
 </table>
