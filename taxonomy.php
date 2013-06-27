@@ -48,21 +48,28 @@
 		switch($columns){
 			case 'ID':
 				echo $post_id;
-			
+				break;
 			case 'num':
-				get_post_custom_values('num',$post_id);
+				echo get_post_meta($post_id,'num',1);
+				break;
 			case 'age':
-				get_post_custom_values('age',$post_id);
+				echo get_post_meta($post_id,'age',1);
+				break;
 			case 'gender':
-				get_post_custom_values('gender',$post_id);
+				echo get_post_meta($post_id,'gender',1);
+				break;
 			case 'department':
-				get_post_custom_values('department',$post_id);
+				echo get_post_meta($post_id,'department',1);
+				break;
 			case 'where':
-				get_post_custom_values('where',$post_id);
+				echo get_post_meta($post_id,'where',1);
+				break;
 			case 'result':
-				get_post_custom_values('result',$post_id);
+				echo get_post_meta($post_id,'result',1);
+				break;
 			case 'count':
-				get_post_custom_values('count',$post_id);
+				echo get_post_meta($post_id,'count',1);
+				break;
 			
 		}
 	}

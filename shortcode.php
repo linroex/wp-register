@@ -9,7 +9,7 @@
 		
 		public static function html_form_func($attrs,$content=NULL){
 			extract(shortcode_atts(array('method'=>'post','action'=>''),$attrs));
-			return '<form class="register_form" method="' . $method .  '"><input type="hidden" name="key" value="' . md5(date('H:i',time())) . '"/>' . do_shortcode($content) . '</form>';
+			return '<form class="register_form" action="' . get_site_url() . '/index.php" method="' . $method .  '"><input type="hidden" name="key" value="' . md5(date('H:i',time())) . '"/>' . do_shortcode($content) . '</form>';
 			
 		}	
 		
