@@ -1,4 +1,5 @@
 [form]
+[key]
 <table style="width:85%;margin:0 auto;">
 	<tr>
 		<td style="width:20%;">姓名</td>

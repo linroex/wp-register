@@ -13,9 +13,14 @@
 	}
 	spl_autoload_register('load');
 	spl_autoload_call('shortcode');
-	spl_autoload_call('taxonomy');
+	//spl_autoload_call('taxonomy');
 	spl_autoload_call('engine');
+	spl_autoload_call('setting');
 	
-
+	function load_js(){
+		echo '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>';
+	}
+	add_action('wp_head','load_js');
+	
 
 ?>

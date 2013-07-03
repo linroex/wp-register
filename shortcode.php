@@ -9,9 +9,12 @@
 		
 		public static function html_form_func($attrs,$content=NULL){
 			extract(shortcode_atts(array('method'=>'post','action'=>''),$attrs));
-			return '<form class="register_form" action="' . get_site_url() . '/index.php" method="' . $method .  '"><input type="hidden" name="key" value="' . md5(date('H:i',time())) . '"/>' . do_shortcode($content) . '</form>';
+			return '<form class="register_form" action="' . get_site_url() . '/index.php" method="' . $method .  '">' . do_shortcode($content) . '</form>';
 			
 		}	
+		public static function html_key_func(){
+			return wp_nonce_field('odie_register','key-field');
+		}
 		
 		public static function html_select_func($attrs,$content=NULL){
 			extract(shortcode_atts(array('name'=>'','title'=>''),$attrs));
@@ -19,7 +22,7 @@
 		}
 		public static function html_submit($attrs){
 			extract(shortcode_atts(array('value'=>''),$attrs));
-			return '<script type="text/javascript">function submit_register(){jQuery.post("index.php",jQuery(".register_form").serialize()).success(function(){jQuery(".register_form").html("<h2>註冊成功</h2>")})}</script><input type="button" value="' . $value . '" onclick="submit_register();"/>';
+			return '<script type="text/javascript">function submit_register(){jQuery.post("index.php",jQuery(".register_form").serialize()).success(function(data){jQuery(".register_form").html(data)})}</script><input type="button" value="' . $value . '" onclick="submit_register();"/>';
 		}
 		public static function html_option_func($attrs){
 			extract(shortcode_atts(array('text'=>'','value'=>''),$attrs));
@@ -47,7 +50,8 @@
 		'option',
 		'textarea',
 		'option_r',
-		'submit'
+		'submit',
+		'key'
 	),'func'=>array(
 		'html_input_func',
 		'html_form_func',
@@ -55,7 +59,8 @@
 		'html_option_func',
 		'html_textarea_func',
 		'html_rangeoption_func',
-		'html_submit'
+		'html_submit',
+		'html_key_func'
 	));
 	
 	for($i=0;$i<=count($shortcodes['code']);$i++){
