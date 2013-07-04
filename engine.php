@@ -1,4 +1,5 @@
 <?php
+	
 	function create_user_post(){
 		global $wpdb;
 		if(get_option('odie_register_installed')!='true'){
@@ -32,7 +33,7 @@
 		
 		if(wp_verify_nonce($_POST['key-field'],'odie_register')){
 			if(!is_email($_POST['prefix_email'])){
-				die('您輸入的email不符合格式');
+				die('您輸入的email不符 合格式');
 			}
 			$data=array(
 				'name'=>$_POST['prefix_stuname'],
@@ -56,7 +57,7 @@
 			$msg=<<<MSG
 	報名成功，請敬帶審核通知
 MSG;
-			wp_mail($_POST['prefix_email'],'報名成功通知信',$msg);
+			wp_mail($_POST['prefix_email'],'報名成功通知信',$msg,'Content-type: text/html');
 			die('建立成功');
 			
 		}
@@ -65,19 +66,22 @@ MSG;
 	add_action('init','create_user_post',0);
 	
 	function setting_cmd(){
+		//error_reporting(-1);
+		//ini_set('display_errors', 'On');
+		set_time_limit(0);
 		
-		include_once('simple.php');	//載入我自定的Excel Class
-		global $wpdb;
-		$table_name = $wpdb->prefix . 'odie_registers';
-		$x=array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 		if(wp_verify_nonce($_POST['key-field'],'reg-setting')){
 			
+			include_once(plugin_dir_path(__FILE__) . 'simple.php');	//載入我自定的Excel Class
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'odie_registers';
+			$x=array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P');
+			$excel = new excel();
 			switch($_POST['cmd']){
 				case 'export':
 					
-					
 					$datas = $wpdb->get_results("SELECT * FROM $table_name",ARRAY_A);
-					$excel = new excel();
+					
 					$flag = false;
 					$row_count = 2;
 					foreach($datas as $data){
@@ -93,27 +97,80 @@ MSG;
 						}
 						$i=0;
 						foreach($data as $key=>$value){
-							
-							
 							$excel->write($x[$i] . $row_count,$value);
 							$i++;
-							
 						}
 						$row_count++;
 					}
 					$fname='wp-content/register-' . time() . '.xls';
 					$excel->save($fname);
-					safe_download($fname);	
-					die();
+					safe_download($fname);					
 					break;
-					
 				case 'import':
-				
+					$path = upload_file($_FILES['import_file']);
+					
+					$excel->load($path);
+					$start_time = time();
+					for($localy=2;$localy<$excel->getHeight();$localy++){
+						if($excel->read(11 , $localy)=='通過'){
+							$usernm = $excel->read(12 , $localy);
+							$passwd = wp_generate_password();
+							$email = $excel->read(10 , $localy);
+							if(is_email($email)){
+								$user = wp_create_user($usernm,$passwd,$email);
+								if(!is_wp_error($user)){
+									wp_update_user(array(
+										'ID'=>$user,
+										'last_name'=>$excel->read(1 , $localy),
+										'nickname'=>$excel->read(1 , $localy),
+										'display_name'=>$excel->read(1 , $localy),
+										'role'=>'author'
+									));
+									$content = <<<text
+		<h2>審核通過</h2>
+		<p>以下是您的帳戶資訊</p>
+		<ul>
+			<li>帳號：$usernm</li>
+			<li>密碼：$passwd</li>
+		</ul>
+text;
+									wp_mail($email,'審核通過',$content,'Content-type: text/html');
+									echo '#' . $excel->read(0 , $localy) . '.新增成功<br />';
+								}else{
+									echo '#' . $excel->read(0 , $localy) . '.新增失敗，錯誤訊息：' . $user->get_error_message() . '<br />';									
+								}								
+							}else{
+								echo '#' . $excel->read(0 , $localy) . '.新增失敗，信箱格式不正確<br />';
+							}				
+						}else{
+							wp_mail($email,'審核未通過','很抱歉在此通知您審核未通過');
+							echo '#' . $excel->read(0 , $localy) . '審核未通過<br />';
+						}
+						
+					}
+					unlink($path);
+					
+					echo '全部新增完畢，共' . $excel->getHeight() . '筆資料，耗時' . (time() - $start_time) . '秒<br />';
 					break;
 			}
+			die();
 		}
 	}
 	add_action('init','setting_cmd');
+	
+	
+	function upload_file($file){
+		if($file['error'] OR empty($file)){
+			throw new Exception($file['error']);
+		}else{
+			$path=ABSPATH . 'wp-content/' . $file['name'];
+			if(move_uploaded_file($file['tmp_name'],$path)){
+				return $path;
+			}else{
+				throw new Exception('Moving file occur error');
+			}
+		}
+	}
 	
 	function safe_download($path){
 		//download file and delete it.

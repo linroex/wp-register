@@ -13,7 +13,7 @@
 		<h2>註冊系統相關設定</h2>
 		<p><form action="$url" method="post">$key <input type="hidden" name="cmd" value="export" /><input type="submit" value="匯出" class="button" /></form></p>
 		
-		<p><form action="$url" method="post">$key <input type="hidden" name="cmd" value="import" /><input type="submit" value="匯入" class="button" /></form></p>
+		<p><form action="$url" method="post" enctype="multipart/form-data">$key <input type="hidden" name="cmd" value="import" /><input type="file" name="import_file"/><input type="submit" value="匯入" class="button" /></form></p>
 page;
 	}
 ?>
