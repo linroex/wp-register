@@ -3,7 +3,7 @@
 <table style="width:85%;margin:0 auto;">
 	<tr>
 		<td style="width:20%;">姓名</td>
-		<td>[input name="prefix_stuname"]</td>
+		<td>[input name="prefix_stuname" placeorder="請輸入姓名"]</td>
 	</tr>
 	<tr>
 		<td>身份</td>
@@ -12,7 +12,7 @@
 	<tr>
 		<td>生日</td>
 		<td>
-[select name="bir_year"][option_r start="1990" end="2013"][/select]年[select name="bir_month"][option_r start="1" end="12"][/select]月[select name="bir_day"][option_r start="1" end="31"][/select]日
+[select name="bir_year"][option_r start="1970" end="2013"][/select]年[select name="bir_month"][option_r start="1" end="12"][/select]月[select name="bir_day"][option_r start="1" end="31"][/select]日
 </td>
 	</tr>
 	<tr>
@@ -25,28 +25,28 @@
 	</tr>
 	<tr>
 		<td>住址</td>
-		<td>[input name="prefix_address"]</td>
+		<td>[address][input name="prefix_address" placeorder="請輸入您的居住地址"]</td>
 	</tr>
 	<tr>
 		<td>聯絡電話（學員）</td>
-		<td>[input name="prefix_stu-phone"]</td>
+		<td>[input name="prefix_stu-phone" placeorder="請輸入學員的行動號碼"]</td>
 	</tr>
 	<tr>
 		<td>家長姓名</td>
-		<td>[input name="prefix_parent-name"]</td>
+		<td>[input name="prefix_parent-name" placeorder="請輸入家長姓名"]</td>
 	</tr>
 	<tr>
 		<td>聯絡電話（家長）</td>
-		<td>[input name="prefix_parent-phone"]</td>
+		<td>市話：[input name="prefix_parent-phone-state"][input name="prefix_parent-phone" placeorder="請輸入市話號碼，區碼請輸入在前一格"]<br/>行動：[input placeorder="請輸入家長的行動號碼" name="prefix_parent-phone-2"]</td>
 	</tr>
 	<tr>
 		<td>電子信箱</td>
-		<td>[input name="prefix_email"]</td>
+		<td>[input name="prefix_email" type="email" placeorder="請輸入電子郵件地址，不建議使用Yahoo信箱避免掉信"]</td>
 	</tr>
 
 	<tr>
 		<td>備註</td>
-		<td>[textarea name="prefix_note"]</td>
+		<td>[textarea name="prefix_note" placeorder="對本活動有任何疑問或建議歡迎在此輸入"]</td>
 	</tr>
 	<tr>
 		<td colspan=2><center>[submit value="送出"]</center></td>

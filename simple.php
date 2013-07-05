@@ -18,7 +18,7 @@
 		}
 		public function write($local,$text) {
 			
-			$this->excel->getActiveSheet()->setCellValue($local,$text);
+			$this->excel->getActiveSheet()->getCell($local)->setValueExplicit($text,PHPExcel_Cell_DataType::TYPE_STRING);
 			return $this;
 		}
 		public function save($path) {

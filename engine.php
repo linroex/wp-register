@@ -27,6 +27,7 @@
 				UNIQUE KEY id (id)
 			)";
 			dbDelta($sql);
+			$wpdb->query('ALTER TABLE  `' . $wpdb->prefix . 'odie_registers` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci');
 			add_option('odie_register_installed','true');
 		}
 		
@@ -41,13 +42,13 @@
 				'birthday'=>$_POST['bir_year'] . '/' . $_POST['bir_month'] . '/' . $_POST['bir_day'],
 				'department'=>$_POST['prefix_department'],
 				'gender'=>$_POST['prefix_gender'],
-				'address'=>$_POST['prefix_address'],
+				'address'=>$_POST['zone1'] . $_POST['zone2'] . $_POST['prefix_address'],
 				'stu_phone'=>$_POST['prefix_stu-phone'],
 				'parent_name'=>$_POST['prefix_parent-name'],
-				'parent_phone'=>$_POST['prefix_parent-phone'],
+				'parent_phone'=>'市話' . $_POST['prefix_stu-phone-state'] . $_POST['prefix_parent-phone'] . "\n行動" . $_POST['prefix_parent-phone-2'],
 				'email'=>$_POST['prefix_email'],
 				'result'=>'未審核',
-				'frog_id'=>'A_XXXXXXXXXXXX',
+				'frog_id'=>'AXXX',
 				'local'=>'',
 				'age'=>date('Y',time())-date('Y',strtotime($_POST['bir_year'])),
 				'note'=>esc_textarea($_POST['prefix_note'])
@@ -111,7 +112,7 @@ MSG;
 					
 					$excel->load($path);
 					$start_time = time();
-					for($localy=2;$localy<$excel->getHeight();$localy++){
+					for($localy=2;$localy<=$excel->getHeight();$localy++){
 						if($excel->read(11 , $localy)=='通過'){
 							$usernm = $excel->read(12 , $localy);
 							$passwd = wp_generate_password();
@@ -150,7 +151,7 @@ text;
 					}
 					unlink($path);
 					
-					echo '全部新增完畢，共' . $excel->getHeight() . '筆資料，耗時' . (time() - $start_time) . '秒<br />';
+					echo '全部新增完畢，共' . $excel->getHeight()-1 . '筆資料，耗時' . (time() - $start_time) . '秒<br />';
 					break;
 			}
 			die();

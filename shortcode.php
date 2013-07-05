@@ -2,8 +2,8 @@
 	
 	class shortcode{
 		public static function html_input_func($attrs){
-			extract(shortcode_atts(array('type'=>'text','name'=>'','value'=>'','title'=>''),$attrs));
-			return '<input type="' . $type . '" name="' . $name . '" value="' . $value . '" />';
+			extract(shortcode_atts(array('type'=>'text','name'=>'','value'=>'','title'=>'','placeorder'=>''),$attrs));
+			return '<input type="' . $type . '" name="' . $name . '" value="' . $value . '" class="' . $name . '" placeholder="'.  $placeorder .'" />';
 			
 		}
 		
@@ -30,8 +30,8 @@
 		}
 		
 		public static function html_textarea_func($attrs){
-			extract(shortcode_atts(array('name'=>'','title'=>'','cols'=>'30','rows'=>'10'),$attrs));
-			return '<textarea name="' . $name . '" cols="' . $cols . '" rows="' . $rows . '"></textarea>';
+			extract(shortcode_atts(array('name'=>'','title'=>'','cols'=>'30','rows'=>'10','placeorder'=>''),$attrs));
+			return '<textarea name="' . $name . '" cols="' . $cols . '" rows="' . $rows . '" placeholder="' . $placeorder . '"></textarea>';
 		}
 		public static function html_rangeoption_func($attrs){
 			extract(shortcode_atts(array('start'=>'','end'=>''),$attrs));
@@ -40,6 +40,19 @@
 				$result.='<option value="' . $i . '">' . $i . '</option>';
 			}
 			return $result;
+		}
+		public static function html_select_address(){
+			$jsPath = get_site_url() . '/wp-content/plugins/wp-register/aj-address.js';
+			
+			return <<<html
+<script type="text/javascript" src="$jsPath"></script>
+<script type="text/javascript">
+	$(window).load(function(){init_address()})
+</script>
+<input id="zipcode" name="zipcode" type="text" style="display:none;"/>
+<select id="zone1" name="zone1"></select>
+<select id="zone2" name="zone2"></select><br />
+html;
 		}
 	}
 	
@@ -51,7 +64,8 @@
 		'textarea',
 		'option_r',
 		'submit',
-		'key'
+		'key',
+		'address'
 	),'func'=>array(
 		'html_input_func',
 		'html_form_func',
@@ -60,7 +74,8 @@
 		'html_textarea_func',
 		'html_rangeoption_func',
 		'html_submit',
-		'html_key_func'
+		'html_key_func',
+		'html_select_address'
 	));
 	
 	for($i=0;$i<=count($shortcodes['code']);$i++){
