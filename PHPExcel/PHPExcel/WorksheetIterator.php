@@ -25,7 +25,6 @@
  * @version    1.7.9, 2013-06-02
  */
 
-
 /**
  * PHPExcel_WorksheetIterator
  *
@@ -54,7 +53,7 @@ class PHPExcel_WorksheetIterator implements Iterator
     /**
      * Create a new worksheet iterator
      *
-     * @param PHPExcel         $subject
+     * @param PHPExcel $subject
      */
     public function __construct(PHPExcel $subject = null)
     {

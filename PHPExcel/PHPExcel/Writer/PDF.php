@@ -25,7 +25,6 @@
  *  @version     1.7.9, 2013-06-02
  */
 
-
 /**
  *  PHPExcel_Writer_PDF
  *
@@ -69,7 +68,6 @@ class PHPExcel_Writer_PDF
         $rendererName = 'PHPExcel_Writer_PDF_' . $pdfLibraryName;
         $this->_renderer = new $rendererName($phpExcel);
     }
-
 
     /**
      *  Magic method to handle direct calls to the configured PDF renderer wrapper class.

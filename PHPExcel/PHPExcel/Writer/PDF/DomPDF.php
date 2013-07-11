@@ -25,7 +25,6 @@
  *  @version     1.7.9, 2013-06-02
  */
 
-
 /**  Require DomPDF library */
 $pdfRendererClassFile = PHPExcel_Settings::getPdfRendererPath() . '/dompdf_config.inc.php';
 if (file_exists($pdfRendererClassFile)) {
@@ -114,7 +113,7 @@ class PHPExcel_Writer_PDF_DomPDF extends PHPExcel_Writer_PDF_Core implements PHP
         //  Write to file
         fwrite($fileHandle, $pdf->output());
 
-		parent::restoreStateAfterSave($fileHandle);
+        parent::restoreStateAfterSave($fileHandle);
     }
 
 }

@@ -23,7 +23,6 @@
  * @version    1.7.9, 2013-06-02
  */
 
-
 /**
  * PHPExcel_IComparable
  *
@@ -33,11 +32,11 @@
  */
 interface PHPExcel_IComparable
 {
-	/**
-	 * Get hash code
-	 *
-	 * @return string	Hash code
-	 */
-	public function getHashCode();
+    /**
+     * Get hash code
+     *
+     * @return string Hash code
+     */
+    public function getHashCode();
 
 }

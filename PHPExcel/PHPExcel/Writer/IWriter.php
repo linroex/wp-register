@@ -25,7 +25,6 @@
  *  @version    1.7.9, 2013-06-02
  */
 
-
 /**
  *  PHPExcel_Writer_IWriter
  *
